@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Spa</title>
+    <style>
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            background-color: #333;
+            padding: 10px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#services">Services</a>
+        <a href="#comments">Client Comments</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About Us</a>
+    </div>
+
+    <h1>Welcome to Our Beauty Spa</h1>
+
+    <section id="services">
+        <h2>Our Services</h2>
+        {% for service in services %}
+            <div>
+                <h3>{{ service.name }}</h3>
+                <p>{{ service.description }}</p>
+                <p>Price: ${{ service.price }}</p>
+                <img src="{{ service.image.url }}" alt="{{ service.name }}" width="200">
+            </div>
+        {% endfor %}
+    </section>
+
+    <section id="comments">
+        <h2>Client Comments</h2>
+        {% for comment in comments %}
+            <div>
+                <h3>{{ comment.client_name }}</h3>
+                <p>{{ comment.comment }}</p>
+                <p>Rating: {{ comment.rating }}/5</p>
+            </div>
+        {% endfor %}
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Address: {{ contact_info.address }}</p>
+        <p>Phone: {{ contact_info.phone }}</p>
+        <p>Email: {{ contact_info.email }}</p>
+    </section>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>{{ about.content }}</p>
+    </section>
+
+    <h2>Book a Service</h2>
+    <form method="post" action="{% url 'book_service' %}">
+        {% csrf_token %}
+        <label for="service">Service:</label>
+        <select name="service" id="service">
+            {% for service in services %}
+                <option value="{{ service.id }}">{{ service.name }}</option>
+            {% endfor %}
+        </select>
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required>
+        <label for="date">Booking Date:</label>
+        <input type="datetime-local" name="date" id="date" required>
+        <label for="notes">Notes:</label>
+        <textarea name="notes" id="notes"></textarea>
+        <button type="submit">Book Now</button>
+    </form>
+</body>
+</html>
