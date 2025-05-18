@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-o%00b$$@*fp25q^8epo_lnp-8nn75@*c!w*ppn-br8@o-)7yqt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['adasa-beauty-spa-2.onrender.com']
+ALLOWED_HOSTS = ['https://adasa-beauty-spa-2.onrender.com']
 
 
 # Application definition
