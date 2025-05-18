@@ -1,0 +1,13 @@
+body{
+    align-items: center;
+    background-color: white;
+
+}
+.table{
+    align-self: center;
+    position: relative;
+    box-shadow: 0px 5px whitesmoke;
+}
+.table th{
+    gap: 100px;
+}
